@@ -1,0 +1,16 @@
+{
+  "name": "Checkmate Arena",
+  "short_name": "Checkmate",
+  "description": "Play chess against the computer or a friend. Online matches with virtual coin stakes.",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "categories": ["games", "board"],
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
