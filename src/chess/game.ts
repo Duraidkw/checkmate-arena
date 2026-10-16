@@ -108,7 +108,22 @@ export class GameSession {
     if (!this.result) this.finish({ winner: null, reason: 'agreement' });
   }
 
+  /** Reverts the last move (or last two moves if count === 2). Returns the undone moves. */
+  undo(count = 1): Move[] {
+    const undone: Move[] = [];
+    for (let i = 0; i < count; i++) {
+      const u = this.chess.undo();
+      if (u) undone.push(u);
+    }
+    if (undone.length > 0) {
+      this.result = null;
+      this.emit();
+    }
+    return undone;
+  }
+
   history(): Move[] {
+
     return this.chess.history({ verbose: true });
   }
 

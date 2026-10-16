@@ -31,15 +31,16 @@
 - 📱 **Installable PWA:** works offline and is ready to package for Google Play
 - ♿ Accessible: ARIA labels on every square, keyboard focus, reduced-motion support
 
-**Roadmap**
+**Roadmap & Updates**
 | Stage | Scope | Status |
 |---|---|---|
 | 1 | Chess game, AI, clocks, PWA, full test suite | ✅ Done |
-| 2 | Login (Google + email) and coin wallet: 1,000 free coins on signup, daily bonus, transaction history | 🔜 Next |
-| 3 | Online matches: matchmaking by stake, real-time moves, **server-side move validation and coin settlement** | ⏳ |
+| 2 | User Profile & Free Cloud Database: 1,000 free coins on signup, daily bonus, ELO rating, move undo, castling UX, and match history | ✅ Done |
+| 3 | Online matches: matchmaking by stake, real-time moves, **server-side move validation and coin settlement** | 🔜 Next |
 | 4 | Google Play release: Trusted Web Activity package via PWABuilder, store listing, privacy policy | ⏳ |
 
 > **Coins are virtual only.** They're earned in the game, can't be bought, and have no cash value. This keeps the app outside real-money gaming rules (India's Online Gaming Act 2025, Google Play's real-money gambling policy).
+
 
 ## 🏗️ Architecture
 

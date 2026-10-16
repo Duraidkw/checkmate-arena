@@ -152,8 +152,20 @@ export class BoardView {
     const sq = (e.target as HTMLElement).closest<HTMLElement>('.square')?.dataset.square as Square | undefined;
     if (!sq) return;
 
-    if (this.selected && this.targets.some((m) => m.to === sq)) {
-      void this.attempt(this.selected, sq);
+    // Support castling by clicking King then clicking the Rook
+    let effectiveTarget = sq;
+    if (this.selected) {
+      const selectedPiece = this.session.chess.get(this.selected);
+      if (selectedPiece && selectedPiece.type === 'k') {
+        if (this.selected === 'e1' && sq === 'h1') effectiveTarget = 'g1' as Square;
+        else if (this.selected === 'e1' && sq === 'a1') effectiveTarget = 'c1' as Square;
+        else if (this.selected === 'e8' && sq === 'h8') effectiveTarget = 'g8' as Square;
+        else if (this.selected === 'e8' && sq === 'a8') effectiveTarget = 'c8' as Square;
+      }
+    }
+
+    if (this.selected && this.targets.some((m) => m.to === effectiveTarget)) {
+      void this.attempt(this.selected, effectiveTarget);
       return;
     }
 
@@ -163,6 +175,7 @@ export class BoardView {
       this.render();
       return;
     }
+
 
     this.select(sq);
     const origin = this.squares.get(sq)!.querySelector<HTMLImageElement>('img.piece');

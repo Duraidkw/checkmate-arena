@@ -34,6 +34,9 @@ export function play(kind: SoundKind): void {
   if (muted) return;
   try {
     ctx ??= new AudioContext();
+    if (ctx.state === 'suspended') {
+      void ctx.resume();
+    }
     let t = ctx.currentTime;
     for (const [freq, ms, type] of TONES[kind]) {
       const osc = ctx.createOscillator();
@@ -51,3 +54,16 @@ export function play(kind: SoundKind): void {
     /* audio unavailable */
   }
 }
+
+if (typeof window !== 'undefined') {
+  const unlockAudio = () => {
+    if (ctx && ctx.state === 'suspended') {
+      void ctx.resume();
+    }
+    window.removeEventListener('pointerdown', unlockAudio);
+    window.removeEventListener('keydown', unlockAudio);
+  };
+  window.addEventListener('pointerdown', unlockAudio, { passive: true });
+  window.addEventListener('keydown', unlockAudio, { passive: true });
+}
+

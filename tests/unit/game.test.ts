@@ -96,7 +96,26 @@ describe('GameSession rules', () => {
     s.moveSan('e4');
     expect(calls).toBe(1);
   });
+
+  it('correctly reverts moves via undo', () => {
+    const s = session();
+    s.moveSan('e4');
+    s.moveSan('e5');
+    expect(s.history()).toHaveLength(2);
+    expect(s.turn).toBe('w');
+
+    const undone = s.undo(1);
+    expect(undone).toHaveLength(1);
+    expect(s.history()).toHaveLength(1);
+    expect(s.turn).toBe('b');
+
+    const undone2 = s.undo(1);
+    expect(undone2).toHaveLength(1);
+    expect(s.history()).toHaveLength(0);
+    expect(s.turn).toBe('w');
+  });
 });
+
 
 describe('GameSession clocks', () => {
   it('starts after the first move, applies increment and flags on timeout', () => {
